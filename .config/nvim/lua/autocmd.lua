@@ -11,12 +11,15 @@ function set_indentation_ft(lang, spaces)
   })
 end
 
--- ----------- --
--- INDENTATION --
--- ----------- --
+-- ----------- ----- --
+-- INDENTATION FIXES --
+-- ----------- ----- --
 
 -- C
 set_indentation_ft("c", 8)
+
+-- Haskell
+set_indentation_ft("haskell", 4)
 
 -- Svelte
 set_indentation_ft("svelte", 2)
