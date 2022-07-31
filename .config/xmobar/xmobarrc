@@ -1,0 +1,107 @@
+Config
+    { overrideRedirect = True
+    , font             = "xft:FiraCode:semibold:size=9"
+    , additionalFonts  =
+        [ "xft:Font Awesome 6 Free Solid:size=9"
+        , "xft:WeatherIcons:size=9"
+        ]
+    , bgColor          = "#223355"
+    , fgColor          = "#bbbbbb"
+    , border           = BottomB
+    , borderColor      = "#778899"
+    , borderWidth      = 2
+    , position         = TopSize L 100 42
+    , lowerOnStart     = True
+    , commands         =
+        [ Run Wireless ""
+            [ "-t", "<fn=1>\xf1eb</fn> <ssid> <quality>"
+            , "-S", "true"
+            , "-H", "80"
+            , "-L", "55"
+            , "-h", "green"
+            , "-n", "orange"
+            , "-l", "hotpink"
+            ] 10
+        , Run WeatherX "KITH"
+            [ ("clear"                  , "<fn=2>\xf00d</fn>")
+            , ("sunny"                  , "<fn=2>\xf00d</fn>")
+            , ("mostly clear"           , "<fn=2>\xf00c</fn>")
+            , ("mostly sunny"           , "<fn=2>\xf00c</fn>")
+            , ("partly sunny"           , "<fn=2>\xf002</fn>")
+            , ("fair"                   , "<fn=2>\xf00c</fn>")
+            , ("cloudy"                 , "<fn=2>\xf013</fn>")
+            , ("overcast"               , "<fn=2>\xf013</fn>")
+            , ("partly cloudy"          , "<fn=2>\xf002</fn>")
+            , ("mostly cloudy"          , "<fn=2>\xf002</fn>")
+            , ("considerable cloudiness", "<fn=2>\xf01e</fn>")
+            ]
+            [ "-t", "<skyConditionS> <tempC>°C"
+            , "-L", "0"
+            , "-H", "25"
+            , "-l"   , "lightblue"
+            , "-n", "#f8f8f2"
+            , "-h"  , "yellow"
+            ] 60
+        , Run Cpu
+            [ "-t", "<fn=1>\xf085</fn> <total>"
+            , "-S", "true"
+            , "-L", "3"
+            , "-H", "50"
+            , "--high"  , "orange"
+            , "--normal", "green"
+            ] 10
+        , Run CoreTemp
+            [ "-t", "<fn=1>\xf769</fn> <core0>/<core1>°C"
+            , "-L", "40"
+            , "-H", "60"
+            , "-l", "lightblue"
+            , "-n", "gray90"
+            , "-h", "red"
+            ] 30
+        , Run Alsa "pulse" "Master"
+            [ "-t", "<volumestatus>"
+            , "-S", "true"
+            , "--"
+            , "-H", "75"
+            , "-L", "30"
+            , "-C", "gray"
+            , "-h", "<fc=white><fn=1>\xf028</fn></fc> "
+            , "-m", "<fn=1>\xf028</fn> "
+            , "-l", "<fn=1>\xf027</fn> "
+            , "-O", ""
+            , "-o", "<fc=orange><fn=1>\xf6a9</fn> mute</fc>"
+            ]
+        , Run Memory ["-t", "<fn=1>\xf2db</fn> <usedratio>%"] 10
+        , Run Swap ["-t", "<fn=1>\xf2db</fn> <usedratio>%"] 10
+        , Run Date "<fn=1>\xf783</fn> <fc=white>%a</fc> %Y-%m-%d & <fc=#8be9fd>%H:%M</fc>" "date" 1
+        , Run Battery
+            [ "-t", "<acstatus>"
+            , "--Low"    , "15"
+            , "--High"   , "30"
+            , "--low"    , "red"
+            , "--normal" , "#ffdd88"
+            , "--high"   , "white"
+            , "-W", "0"
+            , "-f", "\xf244\xf243\xf243\xf243\xf242\xf242\xf242\xf241\xf241\xf240"
+            , "--"
+            , "-o", "<left>% <fn=1><leftbar></fn>"
+            , "-O", "<left>% <fc=green><fn=1>\xf1e6</fn></fc>"
+            , "-i", "<left>% <fc=green><fn=1>\xf1e6</fn></fc>"
+            , "-a", "notify-send -u critical 'Battery running out!!'"
+            , "-A", "3"
+            ] 20
+        , Run UnsafeXMonadLog
+        ]
+    , sepChar  = "%"
+    , alignSep = "}{"
+    , template = "%UnsafeXMonadLog% }{\
+                  \ %wi% <fc=#667788>|</fc>\
+                  \ %alsa:pulse:Master% <fc=#667788>|</fc>\
+                  \ %cpu% <fc=#667788>|</fc>\
+                  \ %coretemp% <fc=#667788>|</fc>\
+                  \ %memory% & %swap% <fc=#667788>|</fc>\
+                  \ %KITH% <fc=#667788>|</fc>\
+                  \               <fc=#667788>|</fc>\
+                  \ %date% <fc=#667788>|</fc>\
+                  \ %battery% "
+    }

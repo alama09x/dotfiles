@@ -1,0 +1,6 @@
+configuration {
+    modi: "drun,run";
+    font: "Fira Code Medium 28";
+    show-icons: true;
+}
+@theme "slate"
