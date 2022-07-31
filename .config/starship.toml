@@ -1,0 +1,21 @@
+# Append a space before the prompt
+format = " $all"
+
+# Do not insert a blank line between prompts
+add_newline = false
+
+# Change the character prompt based on success or failure
+[character]
+success_symbol = "[➜](bold green)"
+error_symbol = "[✗](bold red)"
+
+# Disable line break in between path and prompt
+[line_break]
+disabled = true
+
+[cmd_duration]
+format = "[$duration]($style) "
+style = "bold green"
+
+[directory]
+truncation_length = 0
