@@ -239,36 +239,43 @@ myKeyBindings =
     , ("M-S-=", unGrab *> spawn (myScreenshotTool ++ " -a"))
 
     -- Open file in editor
-    , ("M-C-e", do
+    , ("M-e M-e", do
         f' <- inputPrompt myXPConfig "File to edit"
         case f' of
             Just f  -> spawn (myEditor ++ " " ++ f)
             Nothing -> return ())
 
     -- Open directory in editor
-    , ("M-C-d", do
+    , ("M-e M-d", do
         directoryPrompt
             myXPConfig
             "Directory/Project to edit: "
             (\dir -> spawn (myEditor ++ " -c 'cd " ++ dir ++ "' " ++ dir)))
 
+    -- Edit (~/.)config file
+    , ("M-e M-c", do
+        f' <- inputPrompt myXPConfig "Config file to edit (~/.config/)"
+        case f' of
+          Just f -> spawn (myEditor ++ " ~/.config/" ++ f)
+          Nothing -> return ())
+
     -- Edit the editor's configuration file.
-    , ("M-C-c", spawn (myEditor ++ " " ++ myEditorConfig))
+    , ("M-e M-o", spawn (myEditor ++ " " ++ myEditorConfig))
 
     -- Edit XMonad config
-    , ("M-C-x", spawn (myEditor ++ " " ++ myXMonadConfig))
+    , ("M-e M-x", spawn (myEditor ++ " " ++ myXMonadConfig))
 
     -- Edit Xmobar config
-    , ("M-C-b", spawn (myEditor ++ " " ++ myXmobarConfig))
+    , ("M-e M-b", spawn (myEditor ++ " " ++ myXmobarConfig))
 
     -- Edit shell config
-    , ("M-C-s", spawn (myEditor ++ " " ++ myShellConfig))
+    , ("M-e M-s", spawn (myEditor ++ " " ++ myShellConfig))
 
     -- Edit terminal config
-    , ("M-C-t", spawn (myEditor ++ " " ++ myTerminalConfig))
+    , ("M-e M-t", spawn (myEditor ++ " " ++ myTerminalConfig))
 
     -- Edit scripts
-    , ("M-C-r", do
+    , ("M-e M-r", do
         f' <- inputPrompt myXPConfig "Script to edit"
         case f' of
             Just f  -> spawn (
