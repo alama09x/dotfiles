@@ -95,9 +95,6 @@ myXmobarConfig = "~/.config/xmobar/xmobarrc"
 myTerminalConfig :: String
 myTerminalConfig = "~/.config/alacritty/alacritty.yml"
 
-myLilyPondDir :: String
-myLilyPondDir = "~/Music/LilyPond"
-
 myScriptingDir :: String
 myScriptingDir = "~/.scripts"
 
@@ -269,16 +266,6 @@ myKeyBindings =
 
     -- Edit terminal config
     , ("M-C-t", spawn (myEditor ++ " " ++ myTerminalConfig))
-
-    -- Edit LilyPond files
-    , ("M-C-l", do
-        f' <- inputPrompt myXPConfig "LilyPond file to edit"
-        case f' of
-            Just f  -> spawn (
-                myEditor
-                    ++ " -c 'cd " ++ myLilyPondDir ++ "' "
-                    ++ myLilyPondDir ++ "/" ++ f)
-            Nothing -> return ())
 
     -- Edit scripts
     , ("M-C-r", do
