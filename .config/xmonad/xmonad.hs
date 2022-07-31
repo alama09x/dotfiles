@@ -5,12 +5,14 @@
 
 -- Base library
 import XMonad
+import XMonad.Prelude ( sort )
 
 -- Prompt
 import XMonad.Prompt
 import XMonad.Prompt.Directory
 import XMonad.Prompt.Input
 import XMonad.Prompt.Man
+import XMonad.Prompt.Shell (compgenFiles)
 
 -- Hooks
 import XMonad.ManageHook
@@ -209,17 +211,44 @@ myLayoutHook
 -- ------ --
 -- PROMPT --
 -- ------ --
--- This section consists of my own XPConfig to match our "solarized" theme.
+-- This section consists of my own prompt config to match our theme.
 
 myXPConfig :: XPConfig
 myXPConfig = def
     { font        = "xft:FiraCode:medium:size=13"
-    , bgColor     = "#073642"
+    , bgColor     = "#223355"
     , fgColor     = "#aaaaaa"
     , borderColor = "#dddddd"
     , position    = CenteredAt 0.04 0.5
     , height      = 64
     }
+
+-- ------- --
+-- PROMPTS --
+-- ------- --
+-- This section consists of my defined prompts.
+-- (COPY + PASTED AND MODIFIED FROM XMonad.Prompt.Directory)
+data File = File String ComplCaseSensitivity (String -> X ())
+
+instance XPrompt File where
+    showXPrompt (File x _ _) = x
+    completionFunction (File _ csn _) = getFileCompl csn
+    modeAction (File _ _ f) buf auto =
+      let dir = if null auto then buf else auto
+      in f dir
+
+filePrompt :: XPConfig -> String -> (String -> X ()) -> X ()
+filePrompt c prom f = mkXPrompt (File prom csn f) c (getFileCompl csn) f
+    where csn = complCaseSensitivity c
+
+getFileCompl :: ComplCaseSensitivity -> String -> IO [String]
+getFileCompl csn s = sort . lines <$> compgenFiles csn s
+
+-- Check whether file is hidden or not
+-- notboring :: String -> Bool
+-- notboring ('.':'.':_) = True
+-- notboring ('.':_) = False
+-- notboring _ = True
 
 -- ----------- --
 -- KEYBINDINGS --
@@ -238,26 +267,12 @@ myKeyBindings =
     -- Take screenshot of selection
     , ("M-S-=", unGrab *> spawn (myScreenshotTool ++ " -a"))
 
-    -- Open file in editor
+    -- Open file/directory in editor
     , ("M-e M-e", do
-        f' <- inputPrompt myXPConfig "File to edit"
-        case f' of
-            Just f  -> spawn (myEditor ++ " " ++ f)
-            Nothing -> return ())
-
-    -- Open directory in editor
-    , ("M-e M-d", do
-        directoryPrompt
+        filePrompt
             myXPConfig
-            "Directory/Project to edit: "
-            (\dir -> spawn (myEditor ++ " -c 'cd " ++ dir ++ "' " ++ dir)))
-
-    -- Edit (~/.)config file
-    , ("M-e M-c", do
-        f' <- inputPrompt myXPConfig "Config file to edit (~/.config/)"
-        case f' of
-          Just f -> spawn (myEditor ++ " ~/.config/" ++ f)
-          Nothing -> return ())
+            "File/Directory to edit: "
+            (\f -> spawn (myEditor ++ " " ++ f)))
 
     -- Edit the editor's configuration file.
     , ("M-e M-o", spawn (myEditor ++ " " ++ myEditorConfig))
@@ -273,16 +288,6 @@ myKeyBindings =
 
     -- Edit terminal config
     , ("M-e M-t", spawn (myEditor ++ " " ++ myTerminalConfig))
-
-    -- Edit scripts
-    , ("M-e M-r", do
-        f' <- inputPrompt myXPConfig "Script to edit"
-        case f' of
-            Just f  -> spawn (
-                myEditor
-                    ++ " -c 'cd " ++ myScriptingDir ++ "' "
-                    ++ myScriptingDir ++ "/" ++ f)
-            Nothing -> return())
 
     -- View manpages
     , ("M-C-m", manPrompt myXPConfig)
