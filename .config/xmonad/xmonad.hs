@@ -216,9 +216,9 @@ myLayoutHook
 myXPConfig :: XPConfig
 myXPConfig = def
     { font        = "xft:FiraCode:medium:size=13"
-    , bgColor     = "#223355"
+    , bgColor     = "#223344"
     , fgColor     = "#aaaaaa"
-    , borderColor = "#dddddd"
+    , borderColor = "#aaaaaa"
     , position    = CenteredAt 0.04 0.5
     , height      = 64
     }
