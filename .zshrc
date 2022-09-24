@@ -121,6 +121,10 @@ alias bt-pw-s='bt-s && sleep 7 && pw-s'
 # Internal speakers
 alias pw-i='pw-set.sh internal'
 
+# NetworkManager
+alias nml='nmcli d w l'
+alias nmc='nmcli d w c'
+
 # GHCUP env
 if [ -f "/home/anthonyl/.ghcup/env" ]; then
     source "/home/anthonyl/.ghcup/env"

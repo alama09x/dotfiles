@@ -33,6 +33,7 @@ Config
             , ("overcast"               , "<fn=2>\xf013</fn>")
             , ("partly cloudy"          , "<fn=2>\xf002</fn>")
             , ("mostly cloudy"          , "<fn=2>\xf002</fn>")
+            , ("obscured"               , "<fn=2>\xf002</fn>")
             , ("considerable cloudiness", "<fn=2>\xf01e</fn>")
             ]
             [ "-t", "<skyConditionS> <tempC>°C"

@@ -118,7 +118,7 @@ myWorkspaces =
     [ "<fn=1>\xf121</fn>"
     , "<fn=1>\xf0e0</fn>"
     , "<fn=1>\xf51c</fn>"
-    , "<fn=1>\xf26c</fn>"
+    , "<fn=1>\xf02d</fn>"
     , "<fn=1>\xf590</fn>"
     , "<fn=1>\xf001</fn>"
     , "<fn=1>\xf1fc</fn>"
@@ -325,8 +325,8 @@ myKeyBindings =
     , ("M-["  , spawn "rofi -show  run -theme-str 'element-icon { size: 1.5ch; }'")
 
     -- Multimedia keys
-    , ("<XF86MonBrightnessUp>"  , spawn "brightnessctl set 2%+")
-    , ("<XF86MonBrightnessDown>", spawn "brightnessctl set 2%-")
+    , ("<XF86MonBrightnessUp>"  , spawn "brightnessctl set 1%+")
+    , ("<XF86MonBrightnessDown>", spawn "brightnessctl set 1%-")
     , ("<XF86AudioMute>"        , spawn "pamixer -t"           )
     , ("<XF86AudioLowerVolume>" , spawn "pamixer -d 5"         )
     , ("<XF86AudioRaiseVolume>" , spawn "pamixer -i 5"         )
