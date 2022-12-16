@@ -5,7 +5,7 @@ Config
         [ "xft:Font Awesome 6 Free Solid:size=9"
         , "xft:WeatherIcons:size=9"
         ]
-    , bgColor          = "#223355"
+    , bgColor          = "#334466"
     , fgColor          = "#bbbbbb"
     , border           = BottomB
     , borderColor      = "#778899"

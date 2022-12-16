@@ -3,4 +3,3 @@ export QT_QPA_PLATFORMTHEME=qt5ct
 
 # Use Kvantum themes
 export QT_STYLE_OVERRIDE=kvantum
-

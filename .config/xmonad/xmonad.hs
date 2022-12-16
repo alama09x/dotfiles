@@ -79,6 +79,9 @@ myDocumentViewer = "evince"
 myImageViewer :: String
 myImageViewer = "eog"
 
+myWordProcessor :: String
+myWordProcessor = "libreoffice"
+
 myEditor :: String
 myEditor = myTerminal ++ " -e nvim"
 
@@ -311,13 +314,16 @@ myKeyBindings =
     , ("M-S-m M-S-m", spawn myMailClient)
 
     -- Launch Musescore
-    , ("M-S-m M-S-s", spawn "musescore")
+    , ("M-S-m M-S-s", spawn "mscore")
 
     -- Launch document viewer
     , ("M-S-v", spawn myDocumentViewer)
 
     -- Launch image viewer
     , ("M-S-i", spawn myImageViewer)
+
+    -- Launch word processor
+    , ("M-S-w", spawn myWordProcessor)
 
     -- Launch application menu
     , ("M-p"  , spawn "rofi -show drun -theme-str 'element-icon { size: 1.5ch; }'")

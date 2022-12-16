@@ -1334,4 +1334,4 @@ schemes:
       cyan:    '0x00ffff'
       white:   '0xffffff'
 
-colors: *oceanic_next
+colors: *palenight
