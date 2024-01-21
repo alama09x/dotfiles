@@ -1,0 +1,13 @@
+[Added Associations]
+text/plain=org.gnome.gedit.desktop;
+application/pdf=org.gnome.Evince.desktop;
+x-scheme-handler/sms=org.gnome.Shell.Extensions.GSConnect.desktop;
+x-scheme-handler/tel=org.gnome.Shell.Extensions.GSConnect.desktop;
+
+[Default Applications]
+x-scheme-handler/roblox-studio=roblox-studio.desktop
+x-scheme-handler/roblox-player=roblox-player.desktop
+x-scheme-handler/roblox-studio-auth=roblox-studio-auth.desktop
+x-scheme-handler/roblox=roblox-player.desktop
+application/x-roblox-rbxl=roblox-studio.desktop
+application/x-roblox-rbxlx=roblox-studio.desktop

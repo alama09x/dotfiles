@@ -1,0 +1,42 @@
+game:
+  args: app
+  exe: /home/anthonyl/Games/roblox/roblox
+  working_dir: /home/anthonyl/Games/roblox
+game_slug: roblox
+linux: {}
+name: ROBLOX
+requires: null
+script:
+  files:
+  - grapejuice: https://gitlab.com/brinkervii/grapejuice/-/archive/v7.20.11/grapejuice-v7.20.11.zip
+  game:
+    args: app
+    exe: $GAMEDIR/roblox
+    working_dir: $GAMEDIR
+  install_complete_text: Done, now enter in Roblox website(prefer firefox) and select
+    the experience or open Roblox app
+  installer:
+  - extract:
+      dst: $CACHE
+      file: grapejuice
+      format: zip
+  - merge:
+      dst: $GAMEDIR
+      src: $CACHE
+  - chmodx: $GAMEDIR/install.py
+  - execute:
+      env:
+        key: ./install.py
+      file: $GAMEDIR/install.py
+      terminal: false
+  - execute:
+      command: $HOME/.local/bin/grapejuice app
+  - chmodx: $HOME/.local/bin/grapejuice
+  - execute:
+      command: ln -s $HOME/.local/bin/grapejuice $GAMEDIR/roblox
+  - chmodx: $GAMEDIR/roblox
+slug: roblox-grapejuice
+system: {}
+variables: {}
+version: Grapejuice
+year: 2006
